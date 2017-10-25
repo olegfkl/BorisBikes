@@ -4,7 +4,11 @@ class DockingStation
     Bike.new
   end
 
-  def return_bike
-
+  def dock(bike)
+   @bike=bike
+   # we use an instance variable to store the bike we dock
   end
+
+  attr_reader:bike
+
 end
