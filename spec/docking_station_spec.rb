@@ -30,10 +30,15 @@ describe DockingStation do
     expect { docking_station.release_bike }.to raise_error(RuntimeError,"There are no bikes docked")
   end
 
-  it "raises an error concerning dock station being full" do
+  it "raises an error concerning dock station being full with default capacity" do
     bike = Bike.new
     DockingStation::DEFAULT_CAPACITY.times{docking_station.dock(bike)}
     expect { docking_station.dock(bike) }.to raise_error("Dock is full")
+  end
+
+  it "should allow the system maintainer to enter bike capacity" do
+    station = DockingStation.new(30)
+    expect(station.capacity).to eq 30
   end
 
 end
