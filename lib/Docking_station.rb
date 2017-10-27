@@ -1,6 +1,12 @@
-require_relative './bike.rb'
+require 'bike'
+
 class DockingStation
-  attr_reader:bikes
+
+
+DEFAULT_CAPACITY = 20
+
+attr_reader :available
+
 
 
 
@@ -14,20 +20,19 @@ class DockingStation
   end
 
   def dock(bike)
-    @bikes=bike
     raise "Dock is full" if full?
     @available << bike
   end
 
   private
-  @@DEFAULT_CAPACITY = 20
+
 
   def full?
-    @available.length >= @@DEFAULT_CAPACITY? true:false
+    @available.length >= DEFAULT_CAPACITY ? true : false
   end
 
   def empty?
-    @available.length > 0? true:false
+    @available.length > 0 ? true : false
   end
 
 end
