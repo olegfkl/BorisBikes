@@ -9,6 +9,7 @@ attr_reader :available, :capacity
 
   def initialize(capacity = DEFAULT_CAPACITY)
     @available = []
+    @broken = []
     @capacity = capacity
   end
 
@@ -20,6 +21,11 @@ attr_reader :available, :capacity
   def dock(bike)
     raise "Dock is full" if full?
     @available << bike
+  end
+
+  def report_broken(bike)
+    @broken << bike
+    return "Bike has been reported broken"
   end
 
   private
