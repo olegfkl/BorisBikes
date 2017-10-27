@@ -1,4 +1,4 @@
-require 'bike'
+require_relative  "bike"
 
 class DockingStation
 
@@ -29,7 +29,7 @@ attr_reader :available, :capacity
   end
 
   def empty?
-    @available.length > 0 
+    @available.length > 0
   end
 
 end

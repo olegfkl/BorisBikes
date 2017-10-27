@@ -41,4 +41,9 @@ describe DockingStation do
     expect(station.capacity).to eq 30
   end
 
+  it "User can report broken bike" do
+     bike = Bike.new
+     expect(docking_station.report_broken?(bike)).to eq [bike]
+  end
+
 end
