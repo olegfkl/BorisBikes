@@ -43,7 +43,7 @@ describe DockingStation do
 
   it "User can report broken bike" do
      bike = Bike.new
-     expect(docking_station.report_broken(bike)).to eq ("Bike has been reported broken")
+     expect(docking_station.report_broken(bike  )).to eq ("Bike has been reported broken")
   end
 
 end

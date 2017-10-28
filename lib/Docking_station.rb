@@ -9,22 +9,27 @@ attr_reader :available, :capacity
 
   def initialize(capacity = DEFAULT_CAPACITY)
     @available = []
-    @broken_bikes = []
+    @working_bikes = []
     @capacity = capacity
   end
 
   def release_bike
     raise "There are no bikes docked" unless empty?
-    @available.pop unless true
+    @available.sort_by!{ |x| x.is_a?(String) ? 0 : 1 }
+    if @available[-1] != "broken"
+      @available.pop
+    else
+      raise "Unfortunately the remaining #{@available.length} bike(s) are broken"
+    end
   end
 
   def dock(bike)
     raise "Dock is full" if full?
     # p "REPORT:: report bike broken", bike.report_broken
     # p "BROKEN? is bike broken true?", bike.broken?
-    bike ? @available << bike : @available << false
+    bike ? @available << bike : @available << "broken"
     p "CHECKING ARRAY", @available
-        # @broken_bikes << bike
+        # @working_bikes << bike
         #   capacity - 1
         # end
   end
