@@ -14,16 +14,9 @@ attr_reader :available, :capacity
   end
 
 
-  # def release_bike
-  #   raise "There are no bikes docked" unless empty?
-  #   @available.sort_by!{ |x| x.is_a?(String) ? 0 : 1 }
-  #   unless @available[-1] == "broken"
-  #     @available.pop
-  #   else
-  #     raise "Unfortunately the remaining #{@available.length} bike(s) are broken"
-  #   end
-  # end
-
+  # Consider if the empty? function of in-built Ruby
+  # don't conflict with our empty? method if we were to check something is empty?
+  # inside the class.
 
   def release_bike
     raise "There are no bikes docked" unless empty?
@@ -35,13 +28,8 @@ attr_reader :available, :capacity
 
   def dock(bike)
     raise "Dock is full" if full?
-    # p "REPORT:: report bike broken", bike.report_broken
-    # p "BROKEN? is bike broken true?", bike.broken?
     bike ? @available << bike : @available << "broken"
     p "CHECKING ARRAY", @available
-        # @working_bikes << bike
-        #   capacity - 1
-        # end
   end
 
   private
