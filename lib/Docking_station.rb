@@ -13,15 +13,25 @@ attr_reader :available, :capacity
     @capacity = capacity
   end
 
+
+  # def release_bike
+  #   raise "There are no bikes docked" unless empty?
+  #   @available.sort_by!{ |x| x.is_a?(String) ? 0 : 1 }
+  #   unless @available[-1] == "broken"
+  #     @available.pop
+  #   else
+  #     raise "Unfortunately the remaining #{@available.length} bike(s) are broken"
+  #   end
+  # end
+
+
   def release_bike
     raise "There are no bikes docked" unless empty?
-    @available.sort_by!{ |x| x.is_a?(String) ? 0 : 1 }
-    unless @available[-1] == "broken"
-      @available.pop
-    else
-      raise "Unfortunately the remaining #{@available.length} bike(s) are broken"
-    end
+    raise "Remaining #{@available.length} #{@available.length > 1 ? "bikes are broken" : "bike is broken"}" unless any_working?
+    @available.pop
   end
+
+
 
   def dock(bike)
     raise "Dock is full" if full?
@@ -35,6 +45,11 @@ attr_reader :available, :capacity
   end
 
   private
+
+  def any_working?
+    @available.sort_by!{ |x| x.is_a?(String) ? 0 : 1 }
+    @available[-1] != "broken"
+  end
 
   def full?
     @capacity.nil? ? @available.length >= DEFAULT_CAPACITY : @available.length >= @capacity
