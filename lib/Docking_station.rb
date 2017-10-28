@@ -16,7 +16,7 @@ attr_reader :available, :capacity
   def release_bike
     raise "There are no bikes docked" unless empty?
     @available.sort_by!{ |x| x.is_a?(String) ? 0 : 1 }
-    if @available[-1] != "broken"
+    unless @available[-1] == "broken"
       @available.pop
     else
       raise "Unfortunately the remaining #{@available.length} bike(s) are broken"
